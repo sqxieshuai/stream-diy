@@ -7,9 +7,7 @@
 ####node-stream 
 
 - [如何理解编程语言中「流」（stream）的概念？](https://www.zhihu.com/question/27996269)
-
 - [什么是 Stream](https://zhuanlan.zhihu.com/p/24432941)
-
 - [stream-handbook](https://github.com/substack/stream-handbook)([中文](https://github.com/jabez128/stream-handbook))
 
 ####fp-stream 
