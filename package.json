@@ -1,0 +1,19 @@
+{
+  "name": "stream-diy",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sqxieshuai/stream-diy.git"
+  },
+  "keywords": ["stream"],
+  "author": "xieshuai",
+  "license": "unlicense",
+  "bugs": {
+    "url": "https://github.com/sqxieshuai/stream-diy/issues"
+  },
+  "homepage": "https://github.com/sqxieshuai/stream-diy#readme"
+}
