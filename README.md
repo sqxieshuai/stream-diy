@@ -3,7 +3,6 @@
 参照标准： [stream_spec](https://github.com/dominictarr/stream-spec/blob/master/stream_spec.md)
 
 参考文章:
-
 ####node-stream 
 - [如何理解编程语言中「流」（stream）的概念？](https://www.zhihu.com/question/27996269)
 - [什么是 Stream](https://zhuanlan.zhihu.com/p/24432941)
