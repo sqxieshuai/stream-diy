@@ -51,10 +51,28 @@ Nil.map = function () {
   return this;
 };
 
+//reduce 方法将遍历 list, 使用每个节点的 head 和 memo 作为参数调用 fn, 并返回最终的 memo.
+var reduce = function (list, fn, memo) {
+  if (list.isEmpty == true) {
+    return memo;
+  }
+
+  return reduce(list.tail, fn, fn(memo, list.head));
+};
+
+//object-oriented reduce
+Cons.prototype.reduce = function (fn, memo) {
+  return this.tail.reduce(fn, fn(this.head, memo));
+};
+Nil.reduce = function (fn, memo) {
+  return memo;
+};
+
 //exports
 module.exports = {
   Cons: Cons,
   Nil: Nil,
   cons: cons,
-  map: map
+  map: map,
+  reduce: reduce
 };
