@@ -4,7 +4,7 @@ var cons = LIST.cons;
 var map = LIST.map;
 var reduce = LIST.reduce;
 
-var list = cons(1, cons(2, cons(3, Nil)));
+var list = cons(1, cons(3, cons(5, Nil)));
 var newList = map(list, function (head) {
   console.log("list head ", head);
   return head * 2;
@@ -27,10 +27,17 @@ ooNewList.map(function (head) {
 
 //test reduce
 var reduceResult = reduce(list, function (x, y) {
-  return x + y;
+  console.log(" head memo ", x, y);
+  return x + "" + y;
 });
 console.log("reduceResult ", reduceResult);
 var ooReduceResult = list.reduce(function (x, y) {
-  return x + y;
+  console.log(" head memo ", x, y);
+  return x + "" + y;
 });
 console.log("ooReduceResult ", ooReduceResult);
+var ooReduceRightResult = list.reduceRight(function (x, y) {
+  console.log(" head memo ", x, y);
+  return x + "" + y;
+});
+console.log("ooReduceRightResult ", ooReduceRightResult);

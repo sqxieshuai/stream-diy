@@ -55,26 +55,34 @@ var reduce = function (list, fn, memo) {
   if (list.isEmpty == true) {
     return memo;
   }
-  if (typeof memo == "undefined") {
-    memo = list.head;
-  } else {
-    memo = fn(memo, list.head);
-  }
+  memo = typeof memo == "undefined" ? list.head : fn(memo, list.head);
   return reduce(list.tail, fn, memo);
+  // return reduce(list.tail, fn, fn(list.head, memo));
 };
 
 //object-oriented reduce
+//执行顺序 f(f(f(f(memo, Cons1), Cons2), Cons3), Nil).
+//先执行f, 再执行 reduce
 Cons.prototype.reduce = function (fn, memo) {
-  if (typeof memo == "undefined") {
-    memo = this.head;
-  } else {
-    memo = fn(memo, this.head);
-  }
+  memo = typeof memo == "undefined" ? this.head : fn(memo, this.head);
   return this.tail.reduce(fn, memo);
+  // return this.tail.reduce(fn, fn(this.head, memo));
 };
 Nil.reduce = function (fn, memo) {
   return memo;
 };
+
+//object-oriented reduceRight
+//执行顺序 f(f(f(f(memo, Nil), Cons3), Cons2), Cons1).
+//先执行 reduce, 在执行 f
+Cons.prototype.reduceRight = function (fn, memo) {
+  var _fn = function (memo, head) {
+    return typeof memo == "undefined" ? head : fn.apply(null, arguments);
+  };
+  return _fn(this.tail.reduceRight(fn, memo), this.head);
+  // return fn(this.head, this.tail.reduceRight(fn, memo));
+};
+Nil.reduceRight = Nil.reduce;
 
 //exports
 module.exports = {
