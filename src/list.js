@@ -6,7 +6,7 @@ var Cons = function (head, tail) {
 };
 Cons.prototype.isEmpty = false;
 
-//nil
+//Nil
 //空列表, 没有数据, 不指向另一个列表
 //空列表只存在一个, 所以是个对象而不是构造函数
 var Nil = {
@@ -15,7 +15,7 @@ var Nil = {
     throw new Error("Accessing head on empty list.");
   },
   get tail() {
-    throw new Error("Acessing tail on empty list.");
+    throw new Error("Accessing tail on empty list.");
   }
 };
 
@@ -24,7 +24,7 @@ var Nil = {
  var list = new Cons(1, new Cons(2, new Cons(3, Nil)));
  可简化成:
  function cons(head, tail) {
- return new Cons(head, tail);
+   return new Cons(head, tail);
  }
  var list = cons(1, cons(2, cons(3, Nil)));
  */
@@ -83,6 +83,14 @@ Cons.prototype.reduceRight = function (fn, memo) {
   // return fn(this.head, this.tail.reduceRight(fn, memo));
 };
 Nil.reduceRight = Nil.reduce;
+
+//使用 reduceRight 实现 map
+//此 map 方法, fn 执行的顺序从后到前, 但是结果是从前到后
+Cons.prototype.map = function (fn) {
+  return this.reduceRight(function (right, left) {
+    return cons(fn(left), right);
+  }, Nil);
+};
 
 //exports
 module.exports = {
