@@ -20,14 +20,14 @@ var Nil = {
 };
 
 /*
-创建列表:
-var list = new Cons(1, new Cons(2, new Cons(3, Nil)));
-或简化成:
-function cons(head, tail) {
-  return new Cons(head, tail);
-}
-var list = cons(1, cons(2, cons(3, Nil)));
-*/
+ 创建列表:
+ var list = new Cons(1, new Cons(2, new Cons(3, Nil)));
+ 可简化成:
+ function cons(head, tail) {
+ return new Cons(head, tail);
+ }
+ var list = cons(1, cons(2, cons(3, Nil)));
+ */
 
 //使用Cons构造一个列表
 function cons(head, tail) {
@@ -39,7 +39,6 @@ var map = function (list, fn) {
   if (list.isEmpty == true) {
     return Nil; //list
   }
-
   return cons(fn(list.head), map(list.tail, fn));
 };
 
@@ -56,13 +55,22 @@ var reduce = function (list, fn, memo) {
   if (list.isEmpty == true) {
     return memo;
   }
-
-  return reduce(list.tail, fn, fn(memo, list.head));
+  if (typeof memo == "undefined") {
+    memo = list.head;
+  } else {
+    memo = fn(memo, list.head);
+  }
+  return reduce(list.tail, fn, memo);
 };
 
 //object-oriented reduce
 Cons.prototype.reduce = function (fn, memo) {
-  return this.tail.reduce(fn, fn(this.head, memo));
+  if (typeof memo == "undefined") {
+    memo = this.head;
+  } else {
+    memo = fn(memo, this.head);
+  }
+  return this.tail.reduce(fn, memo);
 };
 Nil.reduce = function (fn, memo) {
   return memo;

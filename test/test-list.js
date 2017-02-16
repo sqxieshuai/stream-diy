@@ -28,9 +28,9 @@ ooNewList.map(function (head) {
 //test reduce
 var reduceResult = reduce(list, function (x, y) {
   return x + y;
-}, 0);
+});
 console.log("reduceResult ", reduceResult);
 var ooReduceResult = list.reduce(function (x, y) {
   return x + y;
-}, 0);
+});
 console.log("ooReduceResult ", ooReduceResult);
