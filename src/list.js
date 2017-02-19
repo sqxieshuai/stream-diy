@@ -77,7 +77,7 @@ Nil.reduce = function (fn, memo) {
 //先执行 reduce, 在执行 f
 Cons.prototype.reduceRight = function (fn, memo) {
   var _fn = function (memo, head) {
-    return typeof memo == "undefined" ? head : fn.apply(null, arguments);
+    return typeof memo == "undefined" ? head : fn.call(null, memo, head);
   };
   return _fn(this.tail.reduceRight(fn, memo), this.head);
   // return fn(this.head, this.tail.reduceRight(fn, memo));
@@ -87,9 +87,24 @@ Nil.reduceRight = Nil.reduce;
 //使用 reduceRight 实现 map
 //此 map 方法, fn 执行的顺序从后到前, 但是结果是从前到后
 Cons.prototype.map = function (fn) {
-  return this.reduceRight(function (right, left) {
-    return cons(fn(left), right);
-  }, Nil);
+  return this.reduceRight(
+    function (right, left) {
+      return cons(fn(left), right);
+    }, 
+    Nil
+  );
+};
+
+//List
+var List = function () {
+  if (arguments.length == 0) {
+    return Nil;
+  }
+
+  var head = arguments[0];
+  var tail = [].slice.call(arguments, 1);
+
+  return cons(head, List.apply(null, tail));
 };
 
 //exports
@@ -98,5 +113,6 @@ module.exports = {
   Nil: Nil,
   cons: cons,
   map: map,
-  reduce: reduce
+  reduce: reduce,
+  List: List
 };

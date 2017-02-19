@@ -3,6 +3,7 @@ var Nil = LIST.Nil;
 var cons = LIST.cons;
 var map = LIST.map;
 var reduce = LIST.reduce;
+var List = LIST.List;
 
 var list = cons(1, cons(3, cons(5, Nil)));
 var newList = map(list, function (head) {
@@ -40,3 +41,11 @@ var ooReduceRightResult = list.reduceRight(function (right, left) {
   return right + "" + left;
 });
 console.log("ooReduceRightResult ", ooReduceRightResult);
+
+//List
+console.log("------------");
+var list1 = List(1, 3, 5, 7, 9, 11);
+list1.map(function (head) {
+  console.log("list1 head ", head);
+});
+console.log("list1 ", list1);
