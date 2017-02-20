@@ -15,6 +15,24 @@ _Stream.prototype.map = function (fn) {
   return () => new __Stream(fn, self.value);
 };
 
+_Stream.prototype.filter = function (fn) {
+  var self = this;
+  function __Stream() {
+    var nextStr = self.next().filter(fn);
+    if (fn(self.value)) {
+      this.value = self.value;
+      this.next = nextStr;
+    } else {
+      const {value, next} = nextStr();
+      this.value = value;
+      this.next = next;
+    }
+  }
+  __Stream.prototype = _Stream.prototype;
+
+  return () => new __Stream();
+};
+
 _Stream.prototype.take = function (n) {
   var self = this;
 

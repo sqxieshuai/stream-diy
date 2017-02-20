@@ -92,8 +92,8 @@ console.log("odds ", take(10, odds));
 //---
 console.log("---Stream OO");
 var str2 = new Stream2(n => n + 1, 1);
-var str2Take = str2().take(10);
-console.log("str2Take ", str2Take);
-var str3 = str2().map(n => n * 2);
-var str3Take = str3().take(10);
-console.log("str3Take ", str3Take);
+console.log("str2Take ", str2().take(10));
+var str3 = str2().map(n => n * 5);
+console.log("str3Take ", str3().take(10));
+var str4 = str2().filter(n => n % 5 == 3);
+console.log("str4Take ", str4().take(10));
