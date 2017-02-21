@@ -6,13 +6,13 @@ function _Stream(fn, value) {
 _Stream.prototype.map = function (fn) {
   var self = this;
 
-  function __Stream(fn, value) {
-    this.value = fn(value);
+  function __Stream() {
+    this.value = fn(self.value);
     this.next = self.next().map(fn);
   }
   __Stream.prototype = _Stream.prototype;
 
-  return () => new __Stream(fn, self.value);
+  return () => new __Stream();
 };
 
 _Stream.prototype.filter = function (fn) {
